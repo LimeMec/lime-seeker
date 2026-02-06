@@ -113,7 +113,7 @@ show_version() {
 # ----------------------
 show_modules() {
     
-    local modules=("local_inventory" "local_security" "system_hardening" "network_tools" "network_discovery" "network_ports" "network_vulnerability" "wifi_tools" "wifi_discovery" "wifi_analysis" "wifi_history" "wifi_baseline_create" "wifi_baseline_check")
+    local modules=("local_inventory" "local_security" "system_hardening" "network_vulnerability" "wifi_tools" "wifi_discovery" "wifi_analysis" "wifi_baseline_create" "wifi_baseline_check")
 
     clear
     echo

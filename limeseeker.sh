@@ -30,13 +30,11 @@ shopt -u nullglob
 MODULES=(
     local_inventory
     local_security
-    system_hardening
     network_vulnerability
-    network_discovery
-    network_ports
+    network_history
+    system_hardening
     wifi_discovery
     wifi_analysis
-    wifi_history
     wifi_baseline_check
     wifi_baseline_create
 )
@@ -51,8 +49,7 @@ source "$BASE_DIR/lib/utils.sh"
 source "$BASE_DIR/lib/ui.sh"
 source "$BASE_DIR/lib/menu.sh"
 source "$BASE_DIR/lib/flags.sh"
-source "$BASE_DIR/lib/network_target.sh"
-source "$BASE_DIR/lib/network_profiles.sh"
+
 
 # ---------------
 # Logging on/off
@@ -92,6 +89,15 @@ REPORT_DIR="$BASE_DIR/reports"
 if [[ "$LOGGING_ENABLED" == true ]]; then
     mkdir -p "$REPORT_DIR"
     export REPORT_FILE="$REPORT_DIR/LimeSeeker_$(date +%Y%m%d_%H%M%S).txt"
+    umask 022
+    touch "$REPORT_FILE"
+    if [[ -n "${SUDO_USER:-}" ]]; then
+    chown "$SUDO_USER":"$SUDO_USER" "$REPORT_FILE" 2>/dev/null || true
+    fi
+
+    chmod 0644 "$REPORT_FILE" 2>/dev/null || true
+    ls -ld /reports 2>/dev/null
+    ls -ld "$BASE_DIR/reports"
 
     exec > >(tee -a "$REPORT_FILE") 2>&1
 

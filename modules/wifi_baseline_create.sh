@@ -115,27 +115,8 @@ wifi_baseline_create() {
     done
 
     ui_echo "${CYAN}${BOLD}WiFi baseline creation completed.${NC}"
-    log_to_file "✔ WiFi baseline creation completed"
-
-    
-    if [[ -f "$BASELINE_FILE" ]]; then
-        ui_echo "${YELLOW}${BOLD}[WARNING]${NC} Baseline already exists for: ${BOLD}$LOCATION / $IFACE${NC}"
-        ui_echo "${YELLOW}File:${NC} $BASELINE_FILE"
-        ui_echo
-        ui_read -rp "Overwrite existing baseline? Type YES to confirm: " confirm_overwrite
-
-        if [[ "${confirm_overwrite^^}" != "YES" ]]; then
-            ui_echo "${YELLOW}[INFO]${NC} Baseline overwrite cancelled for $LOCATION / $IFACE"
-            log_to_file "[INFO] Baseline overwrite cancelled: $LOCATION / $IFACE"
-            echo
-            continue
-        fi
-
-        ui_echo "${YELLOW}[INFO]${NC} Overwriting baseline for $LOCATION / $IFACE"
-        log_to_file "[INFO] Overwriting baseline: $LOCATION / $IFACE"
-        echo
-    fi
-
+    log_to_file "✔ WiFi baseline creation completed"  
+  
     return 0
 }
 

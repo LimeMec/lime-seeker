@@ -1,0 +1,430 @@
+Interface: wlan0 | Target LAN: 192.168.1.208/24
+Method: TCP Connect (-sT), Timing: T2
+
+▶ Discovering live hosts...
+[OK] Found 7 live host(s).
+
+Host: 192.168.1.1
+------------------------------------------------------------
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-02-04 00:29 +0100
+Nmap scan report for 192.168.1.1
+Host is up (0.0010s latency).
+Not shown: 495 closed tcp ports (conn-refused)
+PORT     STATE SERVICE        VERSION
+53/tcp   open  domain         Cloudflare public DNS
+80/tcp   open  http?
+|_http-title: Site doesn't have a title (text/html).
+| fingerprint-strings: 
+|   FourOhFourRequest: 
+|     HTTP/1.0 404 Not Found
+|     Server: httpd/2.0
+|     x-frame-options: SAMEORIGIN
+|     x-xss-protection: 1; mode=block
+|     Date: Tue, 03 Feb 2026 23:33:23 GMT
+|     Content-Type: text/html
+|     Connection: close
+|     <HTML><HEAD><TITLE>404 Not Found</TITLE></HEAD>
+|     <BODY BGCOLOR="#cc9999"><H4>404 Not Found</H4>
+|     File not found.
+|     </BODY></HTML>
+|   GetRequest: 
+|     HTTP/1.0 200 OK
+|     Server: httpd/2.0
+|     x-frame-options: SAMEORIGIN
+|     x-xss-protection: 1; mode=block
+|     Date: Tue, 03 Feb 2026 23:33:18 GMT
+|     Content-Type: text/html
+|     Connection: close
+|     <HTML><HEAD><script>window.top.location.href='/Main_Login.asp';</script>
+|     </HEAD></HTML>
+|   HTTPOptions, RTSPRequest: 
+|     HTTP/1.0 501 Not Implemented
+|     Server: httpd/2.0
+|     x-frame-options: SAMEORIGIN
+|     x-xss-protection: 1; mode=block
+|     Date: Tue, 03 Feb 2026 23:33:18 GMT
+|     Content-Type: text/html
+|     Connection: close
+|     <HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD>
+|     <BODY BGCOLOR="#cc9999"><H4>501 Not Implemented</H4>
+|     That method is not implemented.
+|     </BODY></HTML>
+|   X11Probe: 
+|     HTTP/1.0 400 Bad Request
+|     Server: httpd/2.0
+|     x-frame-options: SAMEORIGIN
+|     x-xss-protection: 1; mode=block
+|     Date: Tue, 03 Feb 2026 23:33:23 GMT
+|     Content-Type: text/html
+|     Connection: close
+|     <HTML><HEAD><TITLE>400 Bad Request</TITLE></HEAD>
+|     <BODY BGCOLOR="#cc9999"><H4>400 Bad Request</H4>
+|     Can't parse request.
+|_    </BODY></HTML>
+515/tcp  open  printer?
+8443/tcp open  ssl/https-alt?
+|_http-title: Site doesn't have a title (text/html).
+| fingerprint-strings: 
+|   FourOhFourRequest: 
+|     HTTP/1.0 404 Not Found
+|     Server: httpd/2.0
+|     x-frame-options: SAMEORIGIN
+|     x-xss-protection: 1; mode=block
+|     Date: Tue, 03 Feb 2026 23:35:10 GMT
+|     Content-Type: text/html
+|     Connection: close
+|     <HTML><HEAD><TITLE>404 Not Found</TITLE></HEAD>
+|     <BODY BGCOLOR="#cc9999"><H4>404 Not Found</H4>
+|     File not found.
+|     </BODY></HTML>
+|   GetRequest: 
+|     HTTP/1.0 200 OK
+|     Server: httpd/2.0
+|     x-frame-options: SAMEORIGIN
+|     x-xss-protection: 1; mode=block
+|     Date: Tue, 03 Feb 2026 23:35:10 GMT
+|     Content-Type: text/html
+|     Connection: close
+|     <HTML><HEAD><script>window.top.location.href='/Main_Login.asp';</script>
+|     </HEAD></HTML>
+|   HTTPOptions, RTSPRequest: 
+|     HTTP/1.0 501 Not Implemented
+|     Server: httpd/2.0
+|     x-frame-options: SAMEORIGIN
+|     x-xss-protection: 1; mode=block
+|     Date: Tue, 03 Feb 2026 23:35:10 GMT
+|     Content-Type: text/html
+|     Connection: close
+|     <HTML><HEAD><TITLE>501 Not Implemented</TITLE></HEAD>
+|     <BODY BGCOLOR="#cc9999"><H4>501 Not Implemented</H4>
+|     That method is not implemented.
+|     </BODY></HTML>
+|   RPCCheck: 
+|     HTTP/1.0 400 Bad Request
+|     Server: httpd/2.0
+|     x-frame-options: SAMEORIGIN
+|     x-xss-protection: 1; mode=block
+|     Date: Tue, 03 Feb 2026 23:35:15 GMT
+|     Content-Type: text/html
+|     Connection: close
+|     <HTML><HEAD><TITLE>400 Bad Request</TITLE></HEAD>
+|     <BODY BGCOLOR="#cc9999"><H4>400 Bad Request</H4>
+|     Can't parse request.
+|_    </BODY></HTML>
+9100/tcp open  jetdirect?
+2 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port80-TCP:V=7.98%I=5%D=2/4%Time=698285BE%P=x86_64-pc-linux-gnu%r(GetRe
+SF:quest,10D,"HTTP/1\.0 200 OK
+Server: httpd/2\.0
+x-frame-o
+SF:ptions: SAMEORIGIN
+x-xss-protection: 1; mode=block
+Date:
+SF: Tue, 03 Feb 2026 23:33:18 GMT
+Content-Type: te
+SF:xt/html
+Connection: close
+
+<HTML><HEAD><script>window\.top\
+SF:.location\.href='/Main_Login\.asp';</script>
+</HEAD></HTML>
+")%r(HTTP
+SF:Options,15C,"HTTP/1\.0 501 Not Implemented
+Server: httpd
+SF:/2\.0
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1; m
+SF:ode=block
+Date: Tue, 03 Feb 2026 23:33:18 GMT
+C
+SF:ontent-Type: text/html
+Connection: close
+
+<HTML><HEAD><T
+SF:ITLE>501 Not Implemented</TITLE></HEAD>
+<BODY BGCOLOR=\"#cc99
+SF:99\"><H4>501 Not Implemented</H4>
+That method is not
+SF:0implemented\.
+</BODY></HTML>
+")%r(RTSPRequest,15C,"HTTP/1\.0 501\
+SF:x20Not Implemented
+Server: httpd/2\.0
+x-frame-options: S
+SF:AMEORIGIN
+x-xss-protection: 1; mode=block
+Date: Tue, 
+SF:03 Feb 2026 23:33:18 GMT
+Content-Type: text/html
+C
+SF:onnection: close
+
+<HTML><HEAD><TITLE>501 Not Implemented
+SF:</TITLE></HEAD>
+<BODY BGCOLOR=\"#cc9999\"><H4>501 Not Impleme
+SF:nted</H4>
+That method is not implemented\.
+</BODY></HTML>
+SF:
+")%r(X11Probe,145,"HTTP/1\.0 400 Bad Request
+Server: h
+SF:ttpd/2\.0
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1;\
+SF:x20mode=block
+Date: Tue, 03 Feb 2026 23:33:23 GMT\
+SF:r
+Content-Type: text/html
+Connection: close
+
+<HTML><HEA
+SF:D><TITLE>400 Bad Request</TITLE></HEAD>
+<BODY BGCOLOR=\"#cc99
+SF:99\"><H4>400 Bad Request</H4>
+Can't parse request\.
+</BOD
+SF:Y></HTML>
+")%r(FourOhFourRequest,13A,"HTTP/1\.0 404 Not Found
+SF:
+Server: httpd/2\.0
+x-frame-options: SAMEORIGIN
+x-xss-pr
+SF:otection: 1; mode=block
+Date: Tue, 03 Feb 2026 
+SF:23:33:23 GMT
+Content-Type: text/html
+Connection: close
+SF:
+
+<HTML><HEAD><TITLE>404 Not Found</TITLE></HEAD>
+<BODY B
+SF:GCOLOR=\"#cc9999\"><H4>404 Not Found</H4>
+File not found\.
+SF:
+</BODY></HTML>
+");
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port8443-TCP:V=7.98%T=SSL%I=5%D=2/4%Time=6982862E%P=x86_64-pc-linux-gnu
+SF:%r(GetRequest,10D,"HTTP/1\.0 200 OK
+Server: httpd/2\.0
+x
+SF:-frame-options: SAMEORIGIN
+x-xss-protection: 1; mode=block\
+SF:r
+Date: Tue, 03 Feb 2026 23:35:10 GMT
+Content-Typ
+SF:e: text/html
+Connection: close
+
+<HTML><HEAD><script>wind
+SF:ow\.top\.location\.href='/Main_Login\.asp';</script>
+</HEAD></HTML>
+"
+SF:)%r(HTTPOptions,15C,"HTTP/1\.0 501 Not Implemented
+Server:\
+SF:x20httpd/2\.0
+x-frame-options: SAMEORIGIN
+x-xss-protection:
+SF:01; mode=block
+Date: Tue, 03 Feb 2026 23:35:10 
+SF:GMT
+Content-Type: text/html
+Connection: close
+
+<HTML>
+SF:<HEAD><TITLE>501 Not Implemented</TITLE></HEAD>
+<BODY BGCOLOR
+SF:=\"#cc9999\"><H4>501 Not Implemented</H4>
+That method is\x
+SF:20not implemented\.
+</BODY></HTML>
+")%r(FourOhFourRequest,13A,"HTT
+SF:P/1\.0 404 Not Found
+Server: httpd/2\.0
+x-frame-optio
+SF:ns: SAMEORIGIN
+x-xss-protection: 1; mode=block
+Date: 
+SF:Tue, 03 Feb 2026 23:35:10 GMT
+Content-Type: text/h
+SF:tml
+Connection: close
+
+<HTML><HEAD><TITLE>404 Not Fou
+SF:nd</TITLE></HEAD>
+<BODY BGCOLOR=\"#cc9999\"><H4>404 Not Found
+SF:</H4>
+File not found\.
+</BODY></HTML>
+")%r(RTSPRequest,15C,"HT
+SF:TP/1\.0 501 Not Implemented
+Server: httpd/2\.0
+x-fram
+SF:e-options: SAMEORIGIN
+x-xss-protection: 1; mode=block
+Da
+SF:te: Tue, 03 Feb 2026 23:35:10 GMT
+Content-Type:
+SF:0text/html
+Connection: close
+
+<HTML><HEAD><TITLE>501 Not
+SF: Implemented</TITLE></HEAD>
+<BODY BGCOLOR=\"#cc9999\"><H4>501
+SF:0Not Implemented</H4>
+That method is not implemented\.\
+SF:n</BODY></HTML>
+")%r(RPCCheck,145,"HTTP/1\.0 400 Bad Request\
+SF:r
+Server: httpd/2\.0
+x-frame-options: SAMEORIGIN
+x-xss-pro
+SF:tection: 1; mode=block
+Date: Tue, 03 Feb 2026 2
+SF:3:35:15 GMT
+Content-Type: text/html
+Connection: close\
+SF:n
+<HTML><HEAD><TITLE>400 Bad Request</TITLE></HEAD>
+<BODY 
+SF:BGCOLOR=\"#cc9999\"><H4>400 Bad Request</H4>
+Can't parse r
+SF:equest\.
+</BODY></HTML>
+");
+MAC Address: D4:5D:64:0C:AE:30 (ASUSTek Computer)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 386.29 seconds
+
+Host: 192.168.1.14
+------------------------------------------------------------
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-02-04 00:36 +0100
+Verbosity Increased to 1.
+Stats: 0:03:36 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
+NSE: Active NSE Script Threads: 1 (1 waiting)
+NSE Timing: About 97.96% done; ETC: 00:39 (0:00:00 remaining)
+Stats: 0:03:36 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
+NSE: Active NSE Script Threads: 1 (1 waiting)
+NSE Timing: About 97.96% done; ETC: 00:39 (0:00:00 remaining)
+Stats: 0:03:36 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
+NSE: Active NSE Script Threads: 1 (1 waiting)
+NSE Timing: About 97.96% done; ETC: 00:39 (0:00:00 remaining)
+Completed NSE at 00:39, 10.12s elapsed
+Initiating NSE at 00:39
+Completed NSE at 00:39, 0.00s elapsed
+Nmap scan report for 192.168.1.14
+Host is up (0.0036s latency).
+Not shown: 499 closed tcp ports (conn-refused)
+PORT     STATE SERVICE VERSION
+7000/tcp open  rtsp    Sonos speaker rtspd
+MAC Address: 34:7E:5C:FE:58:7E (Sonos)
+Service Info: Device: media device
+
+NSE: Script Post-scanning.
+Initiating NSE at 00:39
+Completed NSE at 00:39, 0.00s elapsed
+Initiating NSE at 00:39
+Completed NSE at 00:39, 0.00s elapsed
+Read data files from: /usr/share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 219.76 seconds
+           Raw packets sent: 1 (28B) | Rcvd: 1 (28B)
+
+Host: 192.168.1.50
+------------------------------------------------------------
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-02-04 00:39 +0100
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 203.30 seconds
+
+Host: 192.168.1.63
+------------------------------------------------------------
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-02-04 00:43 +0100
+Nmap scan report for 192.168.1.63
+Host is up (0.027s latency).
+Not shown: 462 closed tcp ports (conn-refused), 33 filtered tcp ports (no-response)
+Some closed ports may be reported as filtered due to --defeat-rst-ratelimit
+PORT      STATE SERVICE    VERSION
+5000/tcp  open  rtsp
+7000/tcp  open  rtsp
+7100/tcp  open  rtsp
+49152/tcp open  tcpwrapped
+49153/tcp open  unknown
+MAC Address: 34:FD:6A:36:B7:C4 (Apple)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 407.34 seconds
+
+Host: 192.168.1.65
+------------------------------------------------------------
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-02-04 00:50 +0100
+Nmap scan report for 192.168.1.65
+Host is up (0.011s latency).
+Not shown: 495 closed tcp ports (conn-refused)
+PORT      STATE SERVICE         VERSION
+8008/tcp  open  http?
+|_http-title: Site doesn't have a title (text/html).
+8009/tcp  open  ssl/ajp13?
+8443/tcp  open  ssl/https-alt?
+|_http-title: Site doesn't have a title (text/html).
+9000/tcp  open  ssl/cslistener?
+10001/tcp open  ssl/scp-config?
+MAC Address: 20:1F:3B:8D:7F:F9 (Google)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 336.34 seconds
+
+Host: 192.168.1.197
+------------------------------------------------------------
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-02-04 00:55 +0100
+Stats: 0:02:23 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 71.40% done; ETC: 00:59 (0:00:58 remaining)
+Stats: 0:02:27 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 73.40% done; ETC: 00:59 (0:00:54 remaining)
+Stats: 0:02:29 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 74.40% done; ETC: 00:59 (0:00:52 remaining)
+Stats: 0:02:38 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 78.60% done; ETC: 00:59 (0:00:43 remaining)
+Stats: 0:02:50 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 84.80% done; ETC: 00:59 (0:00:31 remaining)
+Stats: 0:04:22 elapsed; 0 hosts completed (1 up), 1 undergoing Service Scan
+Service scan Timing: About 100.00% done; ETC: 01:00 (0:00:00 remaining)
+Stats: 0:04:26 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
+NSE Timing: About 98.98% done; ETC: 01:00 (0:00:00 remaining)
+Stats: 0:04:33 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
+NSE Timing: About 98.98% done; ETC: 01:00 (0:00:00 remaining)
+Stats: 0:04:36 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
+NSE Timing: About 98.98% done; ETC: 01:00 (0:00:00 remaining)
+Stats: 0:04:37 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
+NSE Timing: About 98.98% done; ETC: 01:00 (0:00:00 remaining)
+Nmap scan report for 192.168.1.197
+Host is up (0.0022s latency).
+Not shown: 498 closed tcp ports (conn-refused)
+PORT    STATE SERVICE    VERSION
+53/tcp  open  tcpwrapped
+554/tcp open  rtsp
+MAC Address: 90:BF:D9:9E:39:96 (Smart Innovation)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 277.31 seconds
+
+Host: 192.168.1.208
+------------------------------------------------------------
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-02-04 01:00 +0100
+Stats: 0:00:00 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 0.00% done
+Stats: 0:00:06 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 2.80% done; ETC: 01:03 (0:03:28 remaining)
+Stats: 0:00:08 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 4.20% done; ETC: 01:03 (0:03:25 remaining)
+Stats: 0:00:12 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 6.00% done; ETC: 01:03 (0:03:24 remaining)
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 200.47 seconds
+
+Scan Completed
+------------------------------------------------------------
+Hosts scanned: 7
+Potential vulnerabilities found (CVE matches): 0
+

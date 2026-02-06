@@ -92,9 +92,7 @@ main_menu() {
     # ==========================
     declare -A NETWORK_STATUS=(
         [network_discovery]="– not run"
-        [network_ports]="– not run"
-        [network_vulnerability]="– not run"
-    )
+        )
 
     network_status_color() {
         case "$1" in
@@ -204,17 +202,14 @@ main_menu() {
             ui_echo
             ui_echo "${BOLD}${CYAN}Network:${NC}"
             ui_echo "4) Network tools (overview)"
-            ui_echo "5) Network discovery"
-            ui_echo "6) Network port scan"
-            ui_echo "7) Network vulnerability"
+            ui_echo "5) Network vulnerability"
             ui_echo
             ui_echo "${BOLD}${CYAN}WiFi:${NC}"
-            ui_echo "8) WiFi tools (overview)"
-            ui_echo "9) WiFi discovery"
-            ui_echo "10) WiFi analysis"
-            ui_echo "11) WiFi history"
-            ui_echo "12) WiFi baseline create"
-            ui_echo "13) WiFi baseline check"
+            ui_echo "6) WiFi tools (overview)"
+            ui_echo "7) WiFi discovery"
+            ui_echo "8) WiFi analysis"
+            ui_echo "9) WiFi baseline create"
+            ui_echo "10) WiFi baseline check"
             ui_echo
             ui_echo "q) Back to main menu"
             ui_echo
@@ -227,16 +222,13 @@ main_menu() {
                 3)  module="system_hardening" ;;
 
                 4)  module="network_tools" ;;
-                5)  module="network_discovery" ;;
-                6)  module="network_ports" ;;
-                7)  module="network_vulnerability" ;;
+                5)  module="network_vulnerability" ;;
 
-                8)  module="wifi_tools" ;;
-                9)  module="wifi_discovery" ;;
-                10) module="wifi_analysis" ;;
-                11) module="wifi_history" ;;
-                12) module="wifi_baseline_create" ;;
-                13) module="wifi_baseline_check" ;;
+                6)  module="wifi_tools" ;;
+                7)  module="wifi_discovery" ;;
+                8) module="wifi_analysis" ;;
+                9) module="wifi_baseline_create" ;;
+                10) module="wifi_baseline_check" ;;
 
                 q|Q) return ;;
                 *) ui_echo "${RED}Invalid choice${NC}"; sleep 1; continue ;;
@@ -330,8 +322,10 @@ main_menu() {
             ui_echo "  $idx) $loc"
             ((idx++))
         done
+	ui_echo
         ui_echo "  q) Cancel"
         ui_echo
+	ui_echo
 
         if ! ui_read -rp "Choose: " choice; then
             echo ""
@@ -454,9 +448,9 @@ main_menu() {
 
             ui_echo
             ui_echo "${BOLD}${CYAN}Actions:${NC}"
-            ui_echo "1) Create/Update baseline (new location)"
-            ui_echo "2) Check baseline          (choose existing location)"
-            ui_echo "3) Delete baseline         (choose existing location)"
+            ui_echo "1) Create/Update baseline      (new location)"
+            ui_echo "2) Check against baseline      (compare scan vs location)"
+            ui_echo "3) Delete baseline             (choose existing location)"
             ui_echo
             ui_echo "q) Back"
             ui_echo
@@ -585,12 +579,11 @@ main_menu() {
 
             ui_echo "${BOLD}${CYAN}WiFi modules:${NC}"
             ui_echo "1) WiFi discovery    (collect raw scan data)        $(wifi_status_color "${WIFI_STATUS[wifi_discovery]}")"
-            ui_echo "2) WiFi analysis     (analyze latest scan)          $(wifi_status_color "${WIFI_STATUS[wifi_analysis]}")"
-            ui_echo "3) WiFi history      (compare scan vs previous)     $(wifi_status_color "${WIFI_STATUS[wifi_history]}")"
-            ui_echo "4) Scan all (1 -> 2 -> 3)"
+            ui_echo "2) WiFi analysis     (analyze scan)                 $(wifi_status_color "${WIFI_STATUS[wifi_analysis]}")"
+            ui_echo "3) Scan all modules"
             ui_echo
             ui_echo "${BOLD}${CYAN}Baselines:${NC}"
-            ui_echo "5) Baseline manager                                 $(wifi_status_color "${WIFI_STATUS[wifi_baseline_check]}")"
+	    ui_echo "4) Baseline manager  (save results                  $(wifi_status_color "${WIFI_STATUS[wifi_baseline_check]}")"
             ui_echo
             ui_echo "q) Back to main menu"
             ui_echo
@@ -616,12 +609,6 @@ main_menu() {
                     wifi_set_status "wifi_analysis" "$status"
                     ;;
                 3)
-                    log_section "Running module: wifi_history"
-                    wifi_history
-                    status=$?
-                    wifi_set_status "wifi_history" "$status"
-                    ;;
-                4)
                     log_section "Running module: wifi_discovery"
                     wifi_discovery
                     status=$?
@@ -648,11 +635,6 @@ main_menu() {
                         continue
                     fi
 
-                    log_section "Running module: wifi_history"
-                    wifi_history
-                    status=$?
-                    wifi_set_status "wifi_history" "$status"
-
                     ui_echo
                     if [[ $status -eq 0 ]]; then
                         ui_echo "[${GREEN}✔${NC}] ${GREEN}WiFi scan-all completed${NC}"
@@ -665,7 +647,7 @@ main_menu() {
                     pause
                     continue
                     ;;
-                5)
+                4)
                     wifi_baseline_manager
                     status=$?
                     # baseline manager is a menu, not a single module run
@@ -694,168 +676,53 @@ main_menu() {
     }
 
 
-    # ==========================
-    # NETWORK SUBMENU
-    # ==========================
-    network_menu() {
-        local nchoice status
+# ==========================
+# NETWORK SUBMENU
+# ==========================
+network_menu() {
+    local nchoice status
 
-        # mark main module "network" as touched when entering
-        MODULE_STATUS[network]="✔ done"
+MODULE_STATUS[network]="✔ done"
 
-        while true; do
-            ui_clear
-            ui_echo
-	    ui_echo "${BOLD}${CYAN}        _____ _______ _______ _______ _______ _______ _     _ _______  ______"
-            ui_echo " |        |   |  |  | |______ |______ |______ |______ |____/  |______ |_____/"
-            ui_echo " |_____ __|__ |  |  | |______ ______| |______ |______ |    \\_ |______ |    \\_"
-            ui_echo "        Network tools                                          version ${LIMESEEKER_VERSION}"
-            ui_echo "-----------------------------------------------------------------------------${NC}"
-            ui_status_block
-            ui_echo
+while true; do
+    network_restore_tty
+    ui_clear
+    ui_echo
+    ui_echo "${BOLD}${CYAN}        _____ _______ _______ _______ _______ _______ _     _ _______  ______"
+    ui_echo " |        |   |  |  | |______ |______ |______ |______ |____/  |______ |_____/"
+    ui_echo " |_____ __|__ |  |  | |______ ______| |______ |______ |    \\_ |______ |    \\_"
+    ui_echo "        Network tools                                          version ${LIMESEEKER_VERSION}"
+    ui_echo "-----------------------------------------------------------------------------${NC}"
+    ui_status_block
+    ui_echo
 
-            # Optional (recommended): shown by your target/profile helpers
-            if declare -F network_target_display >/dev/null; then
-                ui_echo "${DIM}$(network_target_display)${NC}"
-            fi
-            if declare -F network_profile_display >/dev/null; then
-                ui_echo "${DIM}$(network_profile_display)${NC}"
-            fi
-            ui_echo
+    ui_echo "${BOLD}${CYAN}Network modules:${NC}"
+    ui_echo "1) Network vulnerability scan   (scan local network)   $(wifi_status_color "${WIFI_STATUS[network_vulnerability]}")"
 
-            ui_echo "${BOLD}${CYAN}Network modules:${NC}"
-            ui_echo "1) Discovery (find live hosts)        $(network_status_color "${NETWORK_STATUS[network_discovery]}")"
-            ui_echo "2) Port scan (services)               $(network_status_color "${NETWORK_STATUS[network_ports]}")"
-            ui_echo "3) Vulnerability scan (NSE/vulners)   $(network_status_color "${NETWORK_STATUS[network_vulnerability]}")"
-            ui_echo "4) Scan all (1 -> 2 -> 3)"
-            ui_echo
-            ui_echo "${BOLD}${CYAN}Options:${NC}"
-            ui_echo "t) Change target (auto/manual)   ${DIM}(if available)${NC}"
-            ui_echo "p) Change profile (home/office/iot/lab) ${DIM}(if available)${NC}"
-            ui_echo "c) Clear network status"
-            ui_echo
-            ui_echo "q) Back to main menu"
-            ui_echo
-            ui_echo
+    ui_echo "2) Network result               (analyze scan)         $(wifi_status_color "${WIFI_STATUS[network_result]}")"
 
-            if ! ui_read -rp "Select option: " nchoice; then
-                handle_eof
-            fi
+    ui_echo
+    ui_echo "${BOLD}${CYAN}Results:${NC}"
+    ui_echo "3) Network history              (save results)         $(wifi_status_color "${WIFI_STATUS[network_history_menu]}")"
 
-            status=0
+    ui_echo
+    ui_echo "q) Back to main menu"
+    ui_echo
+    ui_echo
 
-            case "$nchoice" in
-                1)
-                    log_section "Running module: network_discovery"
-                    network_discovery
-                    status=$?
-                    network_set_status "network_discovery" "$status"
-                    ;;
-                2)
-                    log_section "Running module: network_ports"
-                    network_ports
-                    status=$?
-                    network_set_status "network_ports" "$status"
-                    ;;
-                3)
-                    log_section "Running module: network_vulnerability"
-                    network_vulnerability
-                    status=$?
-                    network_set_status "network_vulnerability" "$status"
-                    ;;
-                4)
-                    log_section "Running module: network_discovery"
-                    network_discovery
-                    status=$?
-                    network_set_status "network_discovery" "$status"
-                    if [[ $status -ne 0 ]]; then
-                        ui_echo
-                        ui_echo "[${RED}✖${NC}] ${RED}Discovery failed${NC}"
-                        log_event "[FAIL] Network discovery failed"
-                        ui_echo
-                        pause
-                        continue
-                    fi
+    ui_read -rp "Select option: " nchoice
 
-                    log_section "Running module: network_ports"
-                    network_ports
-                    status=$?
-                    network_set_status "network_ports" "$status"
-                    if [[ $status -ne 0 ]]; then
-                        ui_echo
-                        ui_echo "[${RED}✖${NC}] ${RED}Port scan failed${NC}"
-                        log_event "[FAIL] Network port scan failed"
-                        ui_echo
-                        pause
-                        continue
-                    fi
+    status=0
+    case "${nchoice,,}" in
+      1) network_vulnerability; status=$? ;;
+      2) network_result; status=$? ;;
+      3) network_history_menu; status=$? ;;
+    Q|q) return 0 ;;
+      *) ui_echo "${RED}Invalid choice${NC}"; sleep 1 ;;
+    esac
+  done
+}
 
-                    log_section "Running module: network_vulnerability"
-                    network_vulnerability
-                    status=$?
-                    network_set_status "network_vulnerability" "$status"
-
-                    ui_echo
-                    if [[ $status -eq 0 ]]; then
-                        ui_echo "[${GREEN}✔${NC}] ${GREEN}Network scan-all completed${NC}"
-                        log_event "[OK] Network scan-all completed"
-                    else
-                        ui_echo "[${RED}✖${NC}] ${RED}Network scan-all finished with errors${NC}"
-                        log_event "[FAIL] Network scan-all finished with errors"
-                    fi
-                    ui_echo
-                    pause
-                    continue
-                    ;;
-                t|T)
-                    if declare -F network_set_target_menu >/dev/null; then
-                        network_set_target_menu
-                    else
-                        ui_echo "${YELLOW}[INFO]${NC} Target menu not available (missing network_set_target_menu)"
-                        sleep 1
-                    fi
-                    continue
-                    ;;
-                p|P)
-                    if declare -F network_set_profile_menu >/dev/null; then
-                        network_set_profile_menu
-                    else
-                        ui_echo "${YELLOW}[INFO]${NC} Profile menu not available (missing network_set_profile_menu)"
-                        sleep 1
-                    fi
-                    continue
-                    ;;
-                c|C)
-                    for k in "${!NETWORK_STATUS[@]}"; do
-                        NETWORK_STATUS["$k"]="– not run"
-                    done
-                    ui_echo "${GREEN}[OK]${NC} Network status cleared"
-                    log_event "Network status cleared"
-                    sleep 1
-                    continue
-                    ;;
-                q|Q)
-                    return 0
-                    ;;
-                *)
-                    ui_echo "${RED}Invalid choice${NC}"
-                    sleep 1
-                    continue
-                    ;;
-            esac
-
-            ui_echo
-            if [[ $status -eq 0 ]]; then
-                ui_echo "[${GREEN}✔${NC}] ${GREEN}Network task completed successfully${NC}"
-                log_event "[OK] Network task completed successfully"
-            else
-                ui_echo "[${RED}✖${NC}] ${RED}Network task failed or was aborted${NC}"
-                log_event "[FAIL] Network task failed or aborted"
-            fi
-            ui_echo
-            pause
-        done
-    }
 
 
     # ==========================
